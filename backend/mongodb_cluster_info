@@ -1,0 +1,4 @@
+# MongoDB Atlas — local reference only (do not commit publicly).
+# The running app reads MONGO_DB_URI from the project root .env file.
+username: ahmedian365_db_user
+pw: ytIlwCCNeNe6Ec4j
