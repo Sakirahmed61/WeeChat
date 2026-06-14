@@ -6,10 +6,16 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 // Step 4: The root React component for this project.
 import App from './App.jsx'
+import {BrowserRouter} from 'react-router-dom'
+import { AuthContextProvider } from '../context/AuthContext.jsx'
 
 // Step 5: Find the #root div in index.html and render <App /> inside StrictMode.
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
+    </BrowserRouter>
   </StrictMode>,
 )

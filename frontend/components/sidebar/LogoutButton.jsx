@@ -1,12 +1,21 @@
 import React from 'react'
 import { TbLogout2 } from "react-icons/tb";
+import useLogout from '../../hooks/useLogout';
 
 const LogoutButton = () => {
+
+  const {loading, logout} = useLogout()
   return (
     <div className="mt-auto">
-      <TbLogout2 className='size-6 cursor-pointer transition-all hover:text-red-500' />
+      {!loading ? (
+        <TbLogout2 
+        className='size-6 cursor-pointer transition-all hover:text-red-500' 
+        onClick={logout}
+      />) : <span className='loading loading-spinner'></span>
+      }
     </div>
   )
 }
+
 
 export default LogoutButton

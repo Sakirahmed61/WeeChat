@@ -1,22 +1,29 @@
+import { useEffect } from "react";
+import useConversation from "../../zustand/useConversation";
 import MessageInput from "./MessageInput"
 import Messages from "./Messages"
 import { PiChats } from "react-icons/pi";
 
 const MessageContainer = () => {
-  const noChatSelected = false;
+  const {selectedConversation, setSelectedConversation} = useConversation()
+
+  useEffect(() => {
+    return setSelectedConversation(null)
+  }, [setSelectedConversation])
+
   return (
-    <div className="md:min-w-[450px] flex flex-col gap-2">
-      {noChatSelected ? <NoChatSelected /> : 
+    <div className="md:w-[640px] flex flex-col gap-2">
+      {selectedConversation ? 
       <>
         {/* Header section */}
         <> 
           <div className="bg-slate-900/30 w-full p-3">
-            <h1 className="text-xl font-bold text-gray-200">Heading mavaney</h1>
+            <h1 className="text-xl font-bold text-gray-200">{selectedConversation.fullname}</h1>
           </div>
         </>
         <Messages />
         <MessageInput />
-      </>
+      </> : <NoChatSelected />
       }
     </div>
   )

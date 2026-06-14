@@ -11,11 +11,11 @@ import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 /**
  * POST /api/auth/signup
- * Body: fullName, username, password, confirmPassword, gender
+ * Body: fullname, username, password, confirmPassword, gender
  */
 export const signup = async (req, res) => {
   try {
-    const { fullName, username, password, confirmPassword, gender } = req.body;
+    const { fullname, username, password, confirmPassword, gender } = req.body;
 
     if (password !== confirmPassword) {
       return res.status(400).json({ message: "Passwords do not match" });
@@ -28,7 +28,7 @@ export const signup = async (req, res) => {
     }
 
     // Default avatar from display name (ui-avatars.com)
-    const name = fullName;
+    const name = fullname;
     const editedName = name.trim().replace(" ", "+");
     const profilePic = `https://ui-avatars.com/api/?name=${editedName}`;
 
@@ -36,7 +36,7 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = new User({
-      fullname: fullName,
+      fullname,
       username,
       password: hashedPassword,
       gender: typeof gender === "string" ? gender.toLowerCase() : gender,
@@ -50,7 +50,7 @@ export const signup = async (req, res) => {
       await newUser.save();
       res.status(201).json({
         _id: newUser._id,
-        fullName: newUser.fullname,
+        fullname: newUser.fullname,
         username: newUser.username,
         profilePic: newUser.profilePic,
       });
@@ -84,7 +84,7 @@ export const login = async (req, res) => {
     generateTokenAndSetCookie(user._id, res);
     res.status(200).json({
       _id: user._id,
-      fullName: user.fullname,
+      fullname: user.fullname,
       username: user.username,
       profilePic: user.profilePic,
     });

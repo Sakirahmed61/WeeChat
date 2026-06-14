@@ -30,7 +30,7 @@ app.use(cookieParser());
 // Auth: signup, login, logout — sets/clears JWT cookie
 app.use("/api/auth", authRoutes);
 // Messages: send and list messages in a conversation (protected)
-app.use("/api/messages", messageRoutes);
+app.use("/api/message", messageRoutes);
 // Users: list other users for the chat sidebar (protected)
 app.use("/api/users", userRoutes);
 
