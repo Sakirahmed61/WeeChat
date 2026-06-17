@@ -4,7 +4,7 @@ import useConversation from '../zustand/useConversation'
 const useSendMessages = () => {
   const [loading, setLoading] = useState(false)
 
-  const {messages, setMessages, selectedConversation} = useConversation()
+  const {setMessages, selectedConversation} = useConversation()
 
   const sendMessage = async (message) => {
     setLoading(true)
@@ -22,9 +22,9 @@ const useSendMessages = () => {
         throw new Error("failed to send message", data.error)
       }
 
-      setMessages([...messages, data])
+      setMessages((prevMessages) => [...prevMessages, data])
     } catch (error) {
-      console.log("Error sending message:", error)
+      console.log("Error sending message:", error)  
     } finally {
       setLoading(false)
     }

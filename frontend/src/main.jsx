@@ -8,13 +8,16 @@ import './index.css'
 import App from './App.jsx'
 import {BrowserRouter} from 'react-router-dom'
 import { AuthContextProvider } from '../context/AuthContext.jsx'
+import { SocketContextProvider } from '../context/SocketContext.jsx'
 
 // Step 5: Find the #root div in index.html and render <App /> inside StrictMode.
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <AuthContextProvider>
-        <App />
+        <SocketContextProvider>
+          <App />
+        </SocketContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   </StrictMode>,
