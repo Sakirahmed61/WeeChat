@@ -8,13 +8,12 @@ import { useAuthContext } from "../../context/AuthContext";
 const MessageContainer = () => {
   const {selectedConversation, setSelectedConversation} = useConversation()
 
-
   useEffect(() => {
     return setSelectedConversation(null)
   }, [setSelectedConversation])
 
   return (
-    <div className="md:w-[640px] flex flex-col gap-2">
+    <div className="md:w-160 flex flex-col gap-2">
       {selectedConversation ? 
       <>
         {/* Header section */}

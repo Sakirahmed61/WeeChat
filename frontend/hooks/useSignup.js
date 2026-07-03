@@ -53,7 +53,7 @@ const handleInputErrors = ({fullname, username, password, confirmPassword, gende
   }
 
   if(password !== confirmPassword) {
-    toast.error("check your passwords ni**a")
+    toast.error("check your passwords")
     return false
   }
 

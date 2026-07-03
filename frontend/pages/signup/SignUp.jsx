@@ -65,7 +65,7 @@ const SignUp = () => {
               <span className="text-base label-text">Password</span>
             </label>
             <input 
-              type="password" 
+              type="password"
               placeholder='********'
               className="w-full input input-bordered h-10 rounded-lg border-transparent bg-gray-900/20 hover:border-gray-200 focus:outline-none focus:border-gray-200" 
               value={inputs.password}
