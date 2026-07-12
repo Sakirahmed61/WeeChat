@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import useLogin from '../../hooks/useLogin';
+import { VscEye , VscEyeClosed } from "react-icons/vsc";
+  
 
 const Login = () => {
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const passwordRef = useRef(null)
 
   const {loading, login} = useLogin()
 
@@ -32,6 +36,12 @@ const Login = () => {
               placeholder="Enter Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault()
+                  passwordRef.current.focus()
+                }
+              }}
               className="w-full input rounded-md border-transparent input-bordered h-10 bg-gray-900/20 hover:border-gray-200 focus:outline-none focus:border-gray-200"
             />
           </div>
@@ -40,17 +50,26 @@ const Login = () => {
             <label className="label p-2">
               <span className="text-base label-text">Password</span>
             </label>
-            <input 
-              type="password" 
-              placeholder="Enter password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full input rounded-md border-transparent input-bordered h-10 bg-gray-900/20 hover:border-gray-200 focus:outline-none focus:border-gray-200"
-            />
+            <div className="flex relative items-center">
+              <input 
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter password" 
+                value={password}
+                ref={passwordRef}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full input rounded-md border-transparent input-bordered h-10 bg-gray-900/20 hover:border-gray-200 focus:outline-none focus:border-gray-200"
+              />
+              <div 
+              className="cursor-pointer p-1 absolute right-2 text-gray-200"
+              onClick={() => setShowPassword(prev => !prev)}
+              >
+                {showPassword ? <VscEyeClosed /> : <VscEye /> }
+              </div>
+            </div>
           </div>
 
           <div>
-            <button className="text-[16px] btn btn-block border-none rounded-lg mt-6 text-slate-800 font-bold bg-gray-200 hover:bg-gray-300 hover:text-orange-500"
+            <button className="text-[16px] btn btn-block border-none rounded-lg mt-6 text-slate-800 font-bold bg-gray-200 hover:text-orange-500"
               disabled={loading}
             >
               {loading ? <span className='loading loading-spinner'></span> : "login"}
